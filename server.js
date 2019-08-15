@@ -5,11 +5,11 @@ var config = require('./config');
 var app = express();
 var googleProfile = {};
 
-passport.serializeUser(function(user, done){
+passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done){
+passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
@@ -23,7 +23,7 @@ passport.use(new GoogleStrategy({
         id: profile.id,
         displayName: profile.displayName
       };
-      cd(null, profile);
+      cb(null, profile);
     }
 ));
 
@@ -43,7 +43,7 @@ app.get('/logged', function(req,res){
 
 //Passport routes
 app.get('/auth/google', passport.authenticate('google',{
-  scope: ['profile','e-mail']
+  scope: ['profile','email']
 }));
 app.get('auth/google/callback',
   passport.authenticate('google', {
